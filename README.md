@@ -1,1 +1,1 @@
-[![CircleCI](https://circleci.com/gh/hjemmesidekongen/brudensynger.client.svg?style=svg)](https://circleci.com/gh/hjemmesidekongen/brudensynger.client)
+[![CircleCI](https://circleci.com/gh/hjemmesidekongen/brudensynger.client.svg?style=svg&circle-token=249b6b48b08f68aa86af92a8c3584c53ca20dded)](https://circleci.com/gh/hjemmesidekongen/brudensynger.client)
