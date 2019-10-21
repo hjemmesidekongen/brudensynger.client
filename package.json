@@ -8,8 +8,9 @@
     "start": "next start",
     "export": "next export",
     "deploy": "npm run build && npm run export",
-    "test": "NODE_ENV=test jest --watchAll",
-    "coverage": "npm run test -- --coverage --colors"
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watchAll",
+    "test:coverage": "npm run test -- --coverage --colors"
   },
   "dependencies": {
     "next": "9.1.1",
