@@ -12,7 +12,7 @@ const Index = () => (
       </title>
     </Head>
 
-    <h1>Polterabend i bl.a. Aarhus og København</h1>
+    <h1>Polterabend i bl.a. Aarhus, København, Odense og Aalborg</h1>
     <h2>
       Hej, og velkommen til en god omgang polterabend cd-indspilning hos
       BrudenSynger - det originale polterabend lydstudie i Århus, København og
