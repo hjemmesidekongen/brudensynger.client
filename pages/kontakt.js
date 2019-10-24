@@ -21,9 +21,7 @@ const Kontakt = () => (
     </p>
 
     <p>
-      <i>
-        Husk, du selv kan bestille tid - online. Klik på "BESTIL TID" i menuen.
-      </i>
+      <i>Husk, du selv kan bestille tid - online. Klik på "BESTIL TID" i menuen.</i>
     </p>
 
     <h3>Vores lydstudiers adresser</h3>
@@ -71,9 +69,8 @@ const Kontakt = () => (
     <p>
       <strong>Vigtigt!</strong>
       <br />
-      Sørg for at være godt forberedt. Find os f.eks. på et kort eller kør en
-      tur forbi vores studie et par dage forinden, så I undgår at blive
-      forsinket på dagen.
+      Sørg for at være godt forberedt. Find os f.eks. på et kort eller kør en tur forbi vores studie
+      et par dage forinden, så I undgår at blive forsinket på dagen.
     </p>
   </Layout>
 );

@@ -11,15 +11,12 @@ const Sanglister = () => (
 
     <h1>Sanglister</h1>
     <h2>
-      Du kan vælge mellem en masse sange hos BrudenSynger. Skriv eller ring,
-      hvis der er en sang, du ikke kan finde. Måske kan vi fremskaffe den.
+      Du kan vælge mellem en masse sange hos BrudenSynger. Skriv eller ring, hvis der er en sang, du
+      ikke kan finde. Måske kan vi fremskaffe den.
     </h2>
 
     <p>
-      <a
-        href="https://www.dropbox.com/s/u09smw0eg4od6ag/Sangliste.doc"
-        target="_blank"
-      >
+      <a href="https://www.dropbox.com/s/u09smw0eg4od6ag/Sangliste.doc" target="_blank">
         <strong>Sangliste - Danske Sange</strong>
       </a>
       <br />
@@ -35,15 +32,11 @@ const Sanglister = () => (
     </p>
 
     <p>
-      <a
-        href="https://festklaveret.dk/melodi-til-din-festsang.html"
-        target="_blank"
-      >
+      <a href="https://festklaveret.dk/melodi-til-din-festsang.html" target="_blank">
         <strong>Sangliste - sange i klaverudgaver</strong>
       </a>
       <br />
-      Her finder du især danske folkesange, højskolesange og salmer (eksternt
-      link)
+      Her finder du især danske folkesange, højskolesange og salmer (eksternt link)
       <br />
       Bemærk: tillæg pr. sang kr. 95,00.
     </p>

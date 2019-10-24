@@ -8,7 +8,6 @@ const BlivPartner = () => (
     <Head>
       <title>Bliv partner</title>
     </Head>
-
   </Layout>
 );
 
