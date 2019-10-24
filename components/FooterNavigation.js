@@ -7,9 +7,9 @@ const FooterNavigation = ({ links }) => {
   if (links && links.length) {
     return (
       <nav data-test="navigation">
-        <ul className="links-inline">
+        <ul className="list-inline">
           {links.map(link => (
-            <li key={link.path}>
+            <li key={link.path} className="list-inline-item">
               <ActiveLink href={link.path} activeClassName="active" data-test="link">
                 <a>{link.title}</a>
               </ActiveLink>
