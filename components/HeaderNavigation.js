@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ActiveLink from './ActiveLink';
 
-const HeaderNavigation = ({ links = [] }) => {
+const HeaderNavigation = ({ links }) => {
   if (links && links.length) {
     return (
       <div className="collapse navbar-collapse" id="navbarColor02" data-test="navigation">

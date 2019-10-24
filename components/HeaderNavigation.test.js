@@ -12,9 +12,9 @@ it('renders without error', () => {
 
 it('doesnt render navigation if no links are provided', () => {
   const component = shallow(<HeaderNavigation links={[]} />);
-  const links = findByTestAttr(component, 'navigation');
+  const navigation = findByTestAttr(component, 'navigation');
 
-  expect(links.length).toBe(0);
+  expect(navigation.length).toBe(0);
 });
 
 it('renders all links that are passed via props', () => {
@@ -27,4 +27,11 @@ it('renders all links that are passed via props', () => {
   const linkElements = findByTestAttr(component, 'link');
 
   expect(linkElements.length).toBe(linkProps.length);
+});
+
+it('throws an error if passed props have the wrong shape', () => {
+  const linkProps = [{ wrongKey: 'me' }];
+  const component = () => shallow(<HeaderNavigation links={linkProps} />);
+
+  expect(component).toThrowError();
 });
