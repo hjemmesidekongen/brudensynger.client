@@ -46,7 +46,12 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": [
+    "pages/**/*.{js,jsx}": [
+      "eslint",
+      "pretty-quick — staged",
+      "git add"
+    ],
+    "components/**/*.{js,jsx}": [
       "eslint",
       "pretty-quick — staged",
       "git add"
