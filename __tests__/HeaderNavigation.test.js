@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { findByTestAttr } from '../utils/testUtils';
-import HeaderNavigation from './HeaderNavigation';
+import HeaderNavigation from '../components/HeaderNavigation';
 
 it('renders without error', () => {
   const component = shallow(<HeaderNavigation links={[]} />);

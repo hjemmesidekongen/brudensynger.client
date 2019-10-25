@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { findByTestAttr } from '../utils/testUtils';
-import FooterNavigation from './FooterNavigation';
+import FooterNavigation from '../components/FooterNavigation';
 
 it('renders without error', () => {
   const component = shallow(<FooterNavigation />);
