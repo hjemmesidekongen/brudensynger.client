@@ -6,17 +6,48 @@ import ActiveLink from './ActiveLink';
 const HeaderNavigation = ({ links }) => {
   if (links && links.length) {
     return (
-      <div className="collapse navbar-collapse" id="navbarColor02" data-test="navigation">
-        <ul className="navbar-nav mr-auto">
-          {links.map(link => (
-            <li className="nav-item" key={link.path}>
-              <ActiveLink href={link.path} activeClassName="active" data-test="link">
-                <a className="nav-link">{link.title}</a>
+      <>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div
+          className="collapse navbar-collapse"
+          id="navbarSupportedContent"
+          data-test="navigation"
+        >
+          <ul className="navbar-nav mr-auto">
+            {links.map(link => (
+              <li className="nav-item" key={link.path}>
+                <ActiveLink href={link.path} activeClassName="active">
+                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                  <a className="nav-link" data-test="link">
+                    {link.title}
+                  </a>
+                </ActiveLink>
+              </li>
+            ))}
+          </ul>
+
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <ActiveLink href="/booking" activeClassName="active">
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <a className="nav-link">
+                  <strong>Book nu</strong>
+                </a>
               </ActiveLink>
             </li>
-          ))}
-        </ul>
-      </div>
+          </ul>
+        </div>
+      </>
     );
   }
 

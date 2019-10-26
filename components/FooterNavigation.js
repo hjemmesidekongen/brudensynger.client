@@ -10,8 +10,9 @@ const FooterNavigation = ({ links }) => {
         <ul className="list-inline">
           {links.map(link => (
             <li key={link.path} className="list-inline-item">
-              <ActiveLink href={link.path} activeClassName="active" data-test="link">
-                <a>{link.title}</a>
+              <ActiveLink href={link.path} activeClassName="active">
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <a data-test="link">{link.title}</a>
               </ActiveLink>
             </li>
           ))}
