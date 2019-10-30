@@ -29,7 +29,7 @@ describe('first name input', () => {
     const { getByTestId, findByTestId } = render(<BookingForm />);
     const input = getByTestId('input-firstName');
 
-    fireEvent.change(input, { target: { value: '2' } });
+    fireEvent.change(input, { target: { value: '1' } });
     fireEvent.blur(input);
 
     const validationErrors = await findByTestId('error-firstName');
@@ -55,15 +55,51 @@ describe('first name input', () => {
 });
 
 describe('last name input', () => {
-  beforeEach(() => {});
+  it('exists', async () => {
+    const { queryByTestId } = render(<BookingForm />);
+    const input = queryByTestId('input-lastName');
 
-  it('exists', () => {});
+    expect(input).toBeInTheDocument();
+  });
 
-  it('is required', () => {});
+  it('is required', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-lastName');
 
-  it('requires a minimum of 2 chars', () => {});
+    fireEvent.blur(input);
 
-  it('requires a maximum of 50 chars', () => {});
+    const validationErrors = await findByTestId('error-lastName');
+
+    expect(validationErrors.innerHTML).toBe('Påkrævet');
+  });
+
+  it('shows requires a minimum of 2 chars', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-lastName');
+
+    fireEvent.change(input, { target: { value: '1' } });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-lastName');
+
+    expect(validationErrors.innerHTML).toBe('Tekst er for kort');
+  });
+
+  it('requires a maximum of 50 chars', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-lastName');
+
+    fireEvent.change(input, {
+      target: {
+        value: 'This is a very long string. Actually longer than 50 chars.',
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-lastName');
+
+    expect(validationErrors.innerHTML).toBe('Tekst er for lang');
+  });
 });
 
 describe('email address input', () => {
