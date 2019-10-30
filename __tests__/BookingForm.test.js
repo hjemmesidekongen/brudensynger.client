@@ -1,29 +1,48 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 
-import { findByTestAttr } from '../utils/testUtils';
 import BookingForm from '../components/BookingForm';
 
-it('renders without error', () => {
-  const component = shallow(<BookingForm />);
+it('renders without error', () => {});
 
-  expect(component.length).toBe(1);
+describe('first name input', () => {
+  beforeEach(() => {});
+
+  it('exists', () => {});
+
+  it('is required', async () => {});
+
+  it('shows requires a minimum of 2 chars', () => {});
+
+  it('requires a maximum of 50 chars', () => {});
 });
 
-// it('has correct form fields', () => {
-//   const component = shallow(<BookingForm />);
-//   // const fields = ['studio', 'name', 'phone_no', 'email_address'];
-//   const fields = ['studio'];
-//
-//   for (let i = 0; i < fields.length; i + 1) {
-//     const field = fields[i];
-//     const input = component.find(`[name="${field}"]`);
-//
-//     expect(input.length).toBe(1);
-//   }
-// });
+describe('last name input', () => {
+  beforeEach(() => {});
 
-describe('number of participants', () => {
+  it('exists', () => {});
+
+  it('is required', () => {});
+
+  it('requires a minimum of 2 chars', () => {});
+
+  it('requires a maximum of 50 chars', () => {});
+});
+
+describe('email address input', () => {
+  beforeEach(() => {});
+
+  it('exists', () => {});
+
+  it('is required', () => {});
+  it('disallows a non-email input', () => {});
+});
+
+describe('chosen studio select', () => {
+  it('is hidden when predefined', () => {});
+  it('validates', () => {});
+});
+
+describe('number of participants input', () => {
   it('updates the number of participants inside the box when input change', () => {});
   it('updates the price inside the box when input change', () => {});
   it('sets the price to the minimum price, if lower than 10 participants', () => {});
@@ -32,9 +51,31 @@ describe('number of participants', () => {
   it('cannot be set higher than 30', () => {});
 });
 
-describe('submits the form', () => {
-  it('submit button is disabled if terms are not accepted', () => {});
-  it('submit button is disabled while form is submitting', () => {});
+describe('song choice input', () => {
+  it('starts with 0 songs', () => {});
+  it('cannot select more than 3 songs', () => {});
+  it('add 1 song when click "Add song" button', () => {});
 });
 
-describe('validates', () => {});
+describe('date selection input', () => {
+  it('can only select saturdays', () => {});
+});
+
+describe('time interval selection input', () => {
+  it('cannot select a TO time earlier than FROM time', () => {});
+  it('there has to be at least one hour between FROM time and TO time', () => {});
+  it('can only select timespan in given opening hours (ex. 10.00 - 17.00)', () => {});
+});
+
+describe('terms and conditions input', () => {
+  it('has to be accepted before being able to submit', () => {});
+  it('links to a valid page', () => {
+    // Find link in checkbox label.
+    // Make sure it doesnt return 404.
+  });
+});
+
+describe('submit', () => {
+  it('button is disabled while form is submitting', () => {});
+  it('sends a request to the server, if form validation passes', () => {});
+});

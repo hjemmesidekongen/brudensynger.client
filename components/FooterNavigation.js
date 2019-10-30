@@ -6,13 +6,13 @@ import ActiveLink from './ActiveLink';
 const FooterNavigation = ({ links }) => {
   if (links && links.length) {
     return (
-      <nav data-test="navigation">
+      <nav data-testid="navigation">
         <ul className="list-inline">
           {links.map(link => (
             <li key={link.path} className="list-inline-item">
               <ActiveLink href={link.path} activeClassName="active">
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a data-test="link">{link.title}</a>
+                <a data-testid="link">{link.title}</a>
               </ActiveLink>
             </li>
           ))}

@@ -12,7 +12,7 @@ const ValidationSchema = Yup.object().shape({
     .max(50, 'Tekst er for lang')
     .required('Påkrævet'),
   email: Yup.string()
-    .email('Ugyldig email')
+    .email('Ugyldig e-mail adresse')
     .required('Påkrævet'),
   phone: Yup.string()
     .min(8, 'Telefon nr. er for kort')
@@ -44,7 +44,7 @@ const BookingForm = () => {
         <Form>
           <div className="row">
             <div className="col-md-6">
-              <div className="form-group">
+              <div className="form-group" data-testid="wrapper-firstName">
                 <label htmlFor="firstName">Fornavn</label>
                 <Field
                   name="firstName"
@@ -56,13 +56,15 @@ const BookingForm = () => {
                   }
                 />
                 {errors.firstName && touched.firstName ? (
-                  <div className="invalid-feedback">{errors.firstName}</div>
+                  <div className="invalid-feedback" data-testid="error-firstName">
+                    {errors.firstName}
+                  </div>
                 ) : null}
               </div>
             </div>
 
             <div className="col-md-6">
-              <div className="form-group">
+              <div className="form-group" data-testid="wrapper-lastName">
                 <label htmlFor="lastName">Efternavn</label>
                 <Field
                   name="lastName"
@@ -72,7 +74,9 @@ const BookingForm = () => {
                   }
                 />
                 {errors.lastName && touched.lastName ? (
-                  <div className="invalid-feedback">{errors.lastName}</div>
+                  <div className="invalid-feedback" data-testid="error-lastName">
+                    {errors.lastName}
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -80,7 +84,7 @@ const BookingForm = () => {
 
           <div className="row">
             <div className="col-sm-6">
-              <div className="form-group">
+              <div className="form-group" data-testid="wrapper-emailAddress">
                 <label htmlFor="email">E-mail adresse</label>
                 <Field
                   name="email"
@@ -91,7 +95,9 @@ const BookingForm = () => {
                   }
                 />
                 {errors.email && touched.email ? (
-                  <div className="invalid-feedback">{errors.email}</div>
+                  <div className="invalid-feedback" data-testid="error-emailAddress">
+                    {errors.email}
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -131,7 +137,7 @@ const BookingForm = () => {
             ) : null}
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" data-testid="form-submit">
             Submit
           </button>
         </Form>

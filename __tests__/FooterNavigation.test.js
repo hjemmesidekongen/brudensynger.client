@@ -1,20 +1,32 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
-import { findByTestAttr } from '../utils/testUtils';
 import FooterNavigation from '../components/FooterNavigation';
 
-it('renders without error', () => {
-  const component = shallow(<FooterNavigation />);
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+    };
+  },
+}));
 
-  expect(component.length).toBe(1);
+afterEach(cleanup);
+
+it('renders without error', () => {
+  const component = () => render(<FooterNavigation links={[]} />);
+
+  expect(component).not.toThrowError();
 });
 
 it('doesnt render navigation if no links are passed in', () => {
-  const component = shallow(<FooterNavigation links={[]} />);
-  const navigation = findByTestAttr(component, 'test');
+  const { queryByTestId } = render(<FooterNavigation links={[]} />);
 
-  expect(navigation.length).toBe(0);
+  expect(queryByTestId('navigation')).not.toBeInTheDocument();
 });
 it('renders all links passed in via props', () => {
   const linkProps = [
@@ -22,15 +34,15 @@ it('renders all links passed in via props', () => {
     { title: 'Link 2', path: '/2' },
     { title: 'Link 3', path: '/3' },
   ];
-  const component = shallow(<FooterNavigation links={linkProps} />);
-  const linkElements = findByTestAttr(component, 'link');
+  const { getAllByTestId } = render(<FooterNavigation links={linkProps} />);
+  const linkElements = getAllByTestId('link');
 
-  expect(linkElements.length).toBe(linkProps.length);
+  expect(linkElements).toHaveLength(linkProps.length);
 });
 
 it('throws an error if passed props have the wrong shape', () => {
   const linkProps = [{ wrongKey: 'me' }];
-  const component = () => shallow(<FooterNavigation links={linkProps} />);
+  const component = () => render(<FooterNavigation links={linkProps} />);
 
   expect(component).toThrowError();
 });

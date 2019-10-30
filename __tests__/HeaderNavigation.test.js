@@ -1,20 +1,32 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
-import { findByTestAttr } from '../utils/testUtils';
 import HeaderNavigation from '../components/HeaderNavigation';
 
-it('renders without error', () => {
-  const component = shallow(<HeaderNavigation links={[]} />);
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+    };
+  },
+}));
 
-  expect(component.length).toBe(1);
+afterEach(cleanup);
+
+it('renders without error', () => {
+  const component = () => render(<HeaderNavigation links={[]} />);
+
+  expect(component).not.toThrowError();
 });
 
 it('doesnt render navigation if no links are provided', () => {
-  const component = shallow(<HeaderNavigation links={[]} />);
-  const navigation = findByTestAttr(component, 'navigation');
+  const { queryByTestId } = render(<HeaderNavigation links={[]} />);
 
-  expect(navigation.length).toBe(0);
+  expect(queryByTestId('navigation')).not.toBeInTheDocument();
 });
 
 it('renders all links that are passed via props', () => {
@@ -23,15 +35,15 @@ it('renders all links that are passed via props', () => {
     { title: 'Link 2', path: '/2' },
     { title: 'Link 3', path: '/3' },
   ];
-  const component = shallow(<HeaderNavigation links={linkProps} />);
-  const linkElements = findByTestAttr(component, 'link');
+  const { getAllByTestId } = render(<HeaderNavigation links={linkProps} />);
+  const linkElements = getAllByTestId('link');
 
-  expect(linkElements.length).toBe(linkProps.length);
+  expect(linkElements).toHaveLength(linkProps.length);
 });
 
 it('throws an error if passed props have the wrong shape', () => {
   const linkProps = [{ wrongKey: 'me' }];
-  const component = () => shallow(<HeaderNavigation links={linkProps} />);
+  const component = () => render(<HeaderNavigation links={linkProps} />);
 
   expect(component).toThrowError();
 });
