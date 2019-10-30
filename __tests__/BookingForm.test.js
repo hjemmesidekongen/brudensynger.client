@@ -103,12 +103,39 @@ describe('last name input', () => {
 });
 
 describe('email address input', () => {
-  beforeEach(() => {});
+  it('exists', async () => {
+    const { queryByTestId } = render(<BookingForm />);
+    const input = queryByTestId('input-emailAddress');
 
-  it('exists', () => {});
+    expect(input).toBeInTheDocument();
+  });
 
-  it('is required', () => {});
-  it('disallows a non-email input', () => {});
+  it('is required', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-emailAddress');
+
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-emailAddress');
+
+    expect(validationErrors.innerHTML).toBe('Påkrævet');
+  });
+
+  it('disallows a non-email input', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-emailAddress');
+
+    fireEvent.change(input, {
+      target: {
+        value: 'this.is.not.a.valid.email.com',
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-emailAddress');
+
+    expect(validationErrors.innerHTML).toBe('Ugyldig e-mail adresse');
+  });
 });
 
 describe('chosen studio select', () => {

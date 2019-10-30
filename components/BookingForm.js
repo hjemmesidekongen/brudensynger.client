@@ -95,6 +95,7 @@ const BookingForm = () => {
                   className={
                     errors.email && touched.email ? 'form-control is-invalid' : 'form-control'
                   }
+                  data-testid="input-emailAddress"
                 />
                 {errors.email && touched.email ? (
                   <div className="invalid-feedback" data-testid="error-emailAddress">
