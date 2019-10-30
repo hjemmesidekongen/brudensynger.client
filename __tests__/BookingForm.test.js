@@ -1,19 +1,57 @@
 import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
 import BookingForm from '../components/BookingForm';
 
 it('renders without error', () => {});
 
 describe('first name input', () => {
-  beforeEach(() => {});
+  it('exists', async () => {
+    const { queryByTestId } = render(<BookingForm />);
+    const input = queryByTestId('input-firstName');
 
-  it('exists', () => {});
+    expect(input).toBeInTheDocument();
+  });
 
-  it('is required', async () => {});
+  it('is required', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-firstName');
 
-  it('shows requires a minimum of 2 chars', () => {});
+    fireEvent.blur(input);
 
-  it('requires a maximum of 50 chars', () => {});
+    const validationErrors = await findByTestId('error-firstName');
+
+    expect(validationErrors.innerHTML).toBe('Påkrævet');
+  });
+
+  it('shows requires a minimum of 2 chars', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-firstName');
+
+    fireEvent.change(input, { target: { value: '2' } });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-firstName');
+
+    expect(validationErrors.innerHTML).toBe('Tekst er for kort');
+  });
+
+  it('requires a maximum of 50 chars', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-firstName');
+
+    fireEvent.change(input, {
+      target: {
+        value: 'This is a very long string. Actually longer than 50 chars.',
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-firstName');
+
+    expect(validationErrors.innerHTML).toBe('Tekst er for lang');
+  });
 });
 
 describe('last name input', () => {

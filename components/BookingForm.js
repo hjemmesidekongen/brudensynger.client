@@ -54,6 +54,7 @@ const BookingForm = () => {
                       ? 'form-control is-invalid'
                       : 'form-control'
                   }
+                  data-testid="input-firstName"
                 />
                 {errors.firstName && touched.firstName ? (
                   <div className="invalid-feedback" data-testid="error-firstName">

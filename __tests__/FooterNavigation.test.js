@@ -15,8 +15,6 @@ jest.mock('next/router', () => ({
   },
 }));
 
-afterEach(cleanup);
-
 it('renders without error', () => {
   const component = () => render(<FooterNavigation links={[]} />);
 
