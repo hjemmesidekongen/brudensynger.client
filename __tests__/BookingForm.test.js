@@ -18,6 +18,11 @@ describe('first name input', () => {
     const { getByTestId, findByTestId } = render(<BookingForm />);
     const input = getByTestId('input-firstName');
 
+    fireEvent.change(input, {
+      target: {
+        value: '',
+      },
+    });
     fireEvent.blur(input);
 
     const validationErrors = await findByTestId('error-firstName');
@@ -25,7 +30,7 @@ describe('first name input', () => {
     expect(validationErrors.innerHTML).toBe('Påkrævet');
   });
 
-  it('shows requires a minimum of 2 chars', async () => {
+  it('requires a minimum of 2 chars', async () => {
     const { getByTestId, findByTestId } = render(<BookingForm />);
     const input = getByTestId('input-firstName');
 
@@ -66,6 +71,11 @@ describe('last name input', () => {
     const { getByTestId, findByTestId } = render(<BookingForm />);
     const input = getByTestId('input-lastName');
 
+    fireEvent.change(input, {
+      target: {
+        value: '',
+      },
+    });
     fireEvent.blur(input);
 
     const validationErrors = await findByTestId('error-lastName');
@@ -73,7 +83,7 @@ describe('last name input', () => {
     expect(validationErrors.innerHTML).toBe('Påkrævet');
   });
 
-  it('shows requires a minimum of 2 chars', async () => {
+  it('requires a minimum of 2 chars', async () => {
     const { getByTestId, findByTestId } = render(<BookingForm />);
     const input = getByTestId('input-lastName');
 
@@ -102,6 +112,59 @@ describe('last name input', () => {
   });
 });
 
+describe('phone input', () => {
+  it('exists', async () => {
+    const { queryByTestId } = render(<BookingForm />);
+    const input = queryByTestId('input-phoneNumber');
+
+    expect(input).toBeInTheDocument();
+  });
+
+  it('is required', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-phoneNumber');
+
+    fireEvent.change(input, {
+      target: {
+        value: '',
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-phoneNumber');
+
+    expect(validationErrors.innerHTML).toBe('Påkrævet');
+  });
+
+  it('requires a minimum of 8 chars', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-phoneNumber');
+
+    fireEvent.change(input, { target: { value: '1234567' } });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-phoneNumber');
+
+    expect(validationErrors.innerHTML).toBe('Telefon nr. er for kort');
+  });
+
+  it('requires a maximum of 8 chars', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-phoneNumber');
+
+    fireEvent.change(input, {
+      target: {
+        value: '123456789',
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-phoneNumber');
+
+    expect(validationErrors.innerHTML).toBe('Telefon nr. er for lang');
+  });
+});
+
 describe('email address input', () => {
   it('exists', async () => {
     const { queryByTestId } = render(<BookingForm />);
@@ -114,6 +177,11 @@ describe('email address input', () => {
     const { getByTestId, findByTestId } = render(<BookingForm />);
     const input = getByTestId('input-emailAddress');
 
+    fireEvent.change(input, {
+      target: {
+        value: '',
+      },
+    });
     fireEvent.blur(input);
 
     const validationErrors = await findByTestId('error-emailAddress');
@@ -144,12 +212,55 @@ describe('chosen studio select', () => {
 });
 
 describe('number of participants input', () => {
+  it('is required', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-participants');
+
+    fireEvent.change(input, {
+      target: {
+        value: '',
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-participants');
+
+    expect(validationErrors.innerHTML).toBe('Påkrævet');
+  });
   it('updates the number of participants inside the box when input change', () => {});
   it('updates the price inside the box when input change', () => {});
   it('sets the price to the minimum price, if lower than 10 participants', () => {});
   it('sets the price according to the number of participants', () => {});
-  it('cannot be set lower than 1', () => {});
-  it('cannot be set higher than 30', () => {});
+  it('cannot be set lower than 1', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-participants');
+
+    fireEvent.change(input, {
+      target: {
+        value: 0,
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-participants');
+
+    expect(validationErrors.innerHTML).toBe('Minimum 1 deltager');
+  });
+  it('cannot be set higher than 30', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const input = getByTestId('input-participants');
+
+    fireEvent.change(input, {
+      target: {
+        value: 31,
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-participants');
+
+    expect(validationErrors.innerHTML).toBe('Maksimum 30 deltagere');
+  });
 });
 
 describe('song choice input', () => {

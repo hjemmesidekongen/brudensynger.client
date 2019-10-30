@@ -19,9 +19,9 @@ const ValidationSchema = Yup.object().shape({
     .max(8, 'Telefon nr. er for lang')
     .required('Påkrævet'),
   participants: Yup.number()
-    .required('Påkrævet')
     .min(1, 'Minimum 1 deltager')
-    .max(30, 'Maksimum 30 deltagere'),
+    .max(30, 'Maksimum 30 deltagere')
+    .required('Påkrævet'),
 });
 
 const BookingForm = () => {
@@ -115,9 +115,12 @@ const BookingForm = () => {
                   className={
                     errors.phone && touched.phone ? 'form-control is-invalid' : 'form-control'
                   }
+                  data-testid="input-phoneNumber"
                 />
                 {errors.phone && touched.phone ? (
-                  <div className="invalid-feedback">{errors.phone}</div>
+                  <div className="invalid-feedback" data-testid="error-phoneNumber">
+                    {errors.phone}
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -134,9 +137,12 @@ const BookingForm = () => {
                   ? 'form-control is-invalid'
                   : 'form-control'
               }
+              data-testid="input-participants"
             />
             {errors.participants && touched.participants ? (
-              <div className="invalid-feedback">{errors.participants}</div>
+              <div className="invalid-feedback" data-testid="error-participants">
+                {errors.participants}
+              </div>
             ) : null}
           </div>
 
