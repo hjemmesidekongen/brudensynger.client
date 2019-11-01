@@ -3,19 +3,34 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import BookingForm from '../components/BookingForm';
+import HeaderNavigation from '../components/HeaderNavigation';
 
 it('renders without error', () => {});
 
+describe('props', () => {
+  it('requires studio props', () => {
+    const component = () => render(<BookingForm studios={undefined} />);
+
+    expect(component).toThrowError();
+  });
+
+  it('validates selectedStudio props', () => {
+    const component = () => render(<BookingForm selectedStudio="not a number" studios={[]} />);
+
+    expect(component).toThrowError();
+  });
+});
+
 describe('first name input', () => {
   it('exists', async () => {
-    const { queryByTestId } = render(<BookingForm />);
+    const { queryByTestId } = render(<BookingForm studios={[]} />);
     const input = queryByTestId('input-firstName');
 
     expect(input).toBeInTheDocument();
   });
 
   it('is required', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-firstName');
 
     fireEvent.change(input, {
@@ -31,7 +46,7 @@ describe('first name input', () => {
   });
 
   it('requires a minimum of 2 chars', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-firstName');
 
     fireEvent.change(input, { target: { value: '1' } });
@@ -43,7 +58,7 @@ describe('first name input', () => {
   });
 
   it('requires a maximum of 50 chars', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-firstName');
 
     fireEvent.change(input, {
@@ -61,14 +76,14 @@ describe('first name input', () => {
 
 describe('last name input', () => {
   it('exists', async () => {
-    const { queryByTestId } = render(<BookingForm />);
+    const { queryByTestId } = render(<BookingForm studios={[]} />);
     const input = queryByTestId('input-lastName');
 
     expect(input).toBeInTheDocument();
   });
 
   it('is required', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-lastName');
 
     fireEvent.change(input, {
@@ -84,7 +99,7 @@ describe('last name input', () => {
   });
 
   it('requires a minimum of 2 chars', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-lastName');
 
     fireEvent.change(input, { target: { value: '1' } });
@@ -96,7 +111,7 @@ describe('last name input', () => {
   });
 
   it('requires a maximum of 50 chars', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-lastName');
 
     fireEvent.change(input, {
@@ -114,14 +129,14 @@ describe('last name input', () => {
 
 describe('phone input', () => {
   it('exists', async () => {
-    const { queryByTestId } = render(<BookingForm />);
+    const { queryByTestId } = render(<BookingForm studios={[]} />);
     const input = queryByTestId('input-phoneNumber');
 
     expect(input).toBeInTheDocument();
   });
 
   it('is required', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-phoneNumber');
 
     fireEvent.change(input, {
@@ -137,7 +152,7 @@ describe('phone input', () => {
   });
 
   it('requires a minimum of 8 chars', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-phoneNumber');
 
     fireEvent.change(input, { target: { value: '1234567' } });
@@ -149,7 +164,7 @@ describe('phone input', () => {
   });
 
   it('requires a maximum of 8 chars', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-phoneNumber');
 
     fireEvent.change(input, {
@@ -167,14 +182,14 @@ describe('phone input', () => {
 
 describe('email address input', () => {
   it('exists', async () => {
-    const { queryByTestId } = render(<BookingForm />);
+    const { queryByTestId } = render(<BookingForm studios={[]} />);
     const input = queryByTestId('input-emailAddress');
 
     expect(input).toBeInTheDocument();
   });
 
   it('is required', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-emailAddress');
 
     fireEvent.change(input, {
@@ -190,7 +205,7 @@ describe('email address input', () => {
   });
 
   it('disallows a non-email input', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-emailAddress');
 
     fireEvent.change(input, {
@@ -207,13 +222,65 @@ describe('email address input', () => {
 });
 
 describe('chosen studio select', () => {
-  it('is hidden when predefined', () => {});
-  it('validates', () => {});
+  it('exists', () => {
+    const { queryByTestId } = render(<BookingForm studios={[]} />);
+    const input = queryByTestId('select-studio');
+
+    expect(input).toBeInTheDocument();
+  });
+
+  it('is required', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
+    const input = getByTestId('select-studio');
+
+    fireEvent.change(input, {
+      target: {
+        value: '',
+      },
+    });
+    fireEvent.blur(input);
+
+    const validationErrors = await findByTestId('error-studio');
+
+    expect(validationErrors.innerHTML).toBe('Påkrævet');
+  });
+
+  it('renders all studios props as options', () => {
+    const studios = [{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }];
+    const { getAllByTestId } = render(<BookingForm studios={studios} />);
+    const options = getAllByTestId('select-option-studio');
+
+    expect(options).toHaveLength(studios.length);
+  });
+
+  it('marks the predefined studio as selected', () => {
+    const studios = [{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }];
+    const { getByDisplayValue } = render(<BookingForm studios={studios} selectedStudio={2} />);
+    const selectElement = getByDisplayValue('Studio 2');
+
+    expect(selectElement).toBeTruthy();
+  });
+
+  it('is hidden when studio is preselected', () => {
+    const studios = [{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }];
+    const { getByTestId } = render(<BookingForm studios={studios} selectedStudio={2} />);
+    const component = getByTestId('studio-wrapper');
+
+    expect(component).toHaveClass('d-none');
+  });
+
+  it('is visible when studio is not preselected', () => {
+    const studios = [{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }];
+    const { getByTestId } = render(<BookingForm studios={studios} selectedStudio={undefined} />);
+    const component = getByTestId('studio-wrapper');
+
+    expect(component).not.toHaveClass('hidden');
+  });
 });
 
 describe('number of participants input', () => {
   it('is required', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-participants');
 
     fireEvent.change(input, {
@@ -227,12 +294,17 @@ describe('number of participants input', () => {
 
     expect(validationErrors.innerHTML).toBe('Påkrævet');
   });
+
   it('updates the number of participants inside the box when input change', () => {});
+
   it('updates the price inside the box when input change', () => {});
+
   it('sets the price to the minimum price, if lower than 10 participants', () => {});
+
   it('sets the price according to the number of participants', () => {});
+
   it('cannot be set lower than 1', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-participants');
 
     fireEvent.change(input, {
@@ -246,8 +318,9 @@ describe('number of participants input', () => {
 
     expect(validationErrors.innerHTML).toBe('Minimum 1 deltager');
   });
+
   it('cannot be set higher than 30', async () => {
-    const { getByTestId, findByTestId } = render(<BookingForm />);
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const input = getByTestId('input-participants');
 
     fireEvent.change(input, {

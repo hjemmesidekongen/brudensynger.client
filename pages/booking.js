@@ -11,7 +11,7 @@ const Booking = () => {
         <title>Booking</title>
       </Head>
       <h1>Booking</h1>
-      <BookingForm />
+      <BookingForm studios={[{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }]} />
     </Layout>
   );
 };

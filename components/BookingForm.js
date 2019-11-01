@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
@@ -22,9 +23,10 @@ const ValidationSchema = Yup.object().shape({
     .min(1, 'Minimum 1 deltager')
     .max(30, 'Maksimum 30 deltagere')
     .required('Påkrævet'),
+  studio: Yup.number().required('Påkrævet'),
 });
 
-const BookingForm = () => {
+const BookingForm = ({ studios, selectedStudio }) => {
   return (
     <Formik
       initialValues={{
@@ -33,6 +35,7 @@ const BookingForm = () => {
         email: '',
         phone: '',
         participants: 10,
+        studio: selectedStudio || '',
       }}
       validationSchema={ValidationSchema}
       onSubmit={values => {
@@ -146,6 +149,38 @@ const BookingForm = () => {
             ) : null}
           </div>
 
+          <div
+            className={selectedStudio ? 'form-group d-none' : 'form-group'}
+            data-testid="studio-wrapper"
+          >
+            <label htmlFor="studio">Lydstudie</label>
+            <Field
+              as="select"
+              name="studio"
+              id="studio"
+              className={
+                errors.studio && touched.studio ? 'form-control is-invalid' : 'form-control'
+              }
+              placeholder="Vælg studie"
+              data-testid="select-studio"
+            >
+              {studios.map(studio => (
+                <option
+                  key={`studio-${studio.id}`}
+                  value={studio.id}
+                  data-testid="select-option-studio"
+                >
+                  {studio.name}
+                </option>
+              ))}
+            </Field>
+            {errors.studio && touched.studio ? (
+              <div className="invalid-feedback" data-testid="error-studio">
+                {errors.studio}
+              </div>
+            ) : null}
+          </div>
+
           <button type="submit" className="btn btn-primary" data-testid="form-submit">
             Submit
           </button>
@@ -153,6 +188,20 @@ const BookingForm = () => {
       )}
     </Formik>
   );
+};
+
+BookingForm.defaultProps = {
+  selectedStudio: null,
+};
+
+BookingForm.propTypes = {
+  selectedStudio: PropTypes.number,
+  studios: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default BookingForm;
