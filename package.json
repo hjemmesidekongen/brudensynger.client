@@ -18,6 +18,7 @@
     "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-dom": "16.11.0",
+    "react-textarea-autosize": "^7.1.2",
     "yup": "^0.27.0"
   },
   "devDependencies": {
@@ -25,8 +26,8 @@
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
-    "@testing-library/jest-dom": "^4.2.0",
-    "@testing-library/react": "^9.3.0",
+    "@testing-library/jest-dom": "^4.2.3",
+    "@testing-library/react": "^9.3.1",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-plugin-react-remove-properties": "^0.3.0",
