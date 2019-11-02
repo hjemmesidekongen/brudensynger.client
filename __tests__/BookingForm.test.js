@@ -3,7 +3,6 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import BookingForm from '../components/BookingForm';
-import HeaderNavigation from '../components/HeaderNavigation';
 
 it('renders without error', () => {});
 
@@ -21,6 +20,7 @@ describe('props', () => {
   });
 });
 
+// FirstName input.
 describe('first name input', () => {
   it('exists', async () => {
     const { queryByTestId } = render(<BookingForm studios={[]} />);
@@ -74,6 +74,7 @@ describe('first name input', () => {
   });
 });
 
+// LastName input.
 describe('last name input', () => {
   it('exists', async () => {
     const { queryByTestId } = render(<BookingForm studios={[]} />);
@@ -127,6 +128,7 @@ describe('last name input', () => {
   });
 });
 
+// Phone input.
 describe('phone input', () => {
   it('exists', async () => {
     const { queryByTestId } = render(<BookingForm studios={[]} />);
@@ -180,6 +182,7 @@ describe('phone input', () => {
   });
 });
 
+// Email address.
 describe('email address input', () => {
   it('exists', async () => {
     const { queryByTestId } = render(<BookingForm studios={[]} />);
@@ -221,6 +224,7 @@ describe('email address input', () => {
   });
 });
 
+// Studio select.
 describe('chosen studio select', () => {
   it('exists', () => {
     const { queryByTestId } = render(<BookingForm studios={[]} />);
@@ -278,6 +282,7 @@ describe('chosen studio select', () => {
   });
 });
 
+// Number of participants.
 describe('number of participants input', () => {
   it('is required', async () => {
     const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
@@ -337,22 +342,38 @@ describe('number of participants input', () => {
 });
 
 describe('song choice input', () => {
+  it('exists', () => {});
   it('starts with 0 songs', () => {});
   it('cannot select more than 3 songs', () => {});
   it('add 1 song when click "Add song" button', () => {});
 });
 
 describe('date selection input', () => {
+  it('exists', () => {});
+  it('is required', () => {});
   it('can only select saturdays', () => {});
 });
 
 describe('time interval selection input', () => {
+  it('exists', () => {});
   it('cannot select a TO time earlier than FROM time', () => {});
   it('there has to be at least one hour between FROM time and TO time', () => {});
   it('can only select timespan in given opening hours (ex. 10.00 - 17.00)', () => {});
 });
 
+// Comments textarea.
+describe('comments textarea', () => {
+  it('exists', () => {
+    const { queryByTestId } = render(<BookingForm studios={[]} />);
+    const component = queryByTestId('textarea-comments');
+
+    expect(component).toBeInTheDocument();
+  });
+});
+
+// Terms and conditions checkbox.
 describe('terms and conditions input', () => {
+  it('exists', () => {});
   it('has to be accepted before being able to submit', () => {});
   it('links to a valid page', () => {
     // Find link in checkbox label.
@@ -360,6 +381,7 @@ describe('terms and conditions input', () => {
   });
 });
 
+// Submit button.
 describe('submit', () => {
   it('button is disabled while form is submitting', () => {});
   it('sends a request to the server, if form validation passes', () => {});

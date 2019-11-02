@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
+import TextareaAutosize from 'react-textarea-autosize';
 import * as Yup from 'yup';
 
 const ValidationSchema = Yup.object().shape({
@@ -23,6 +24,7 @@ const ValidationSchema = Yup.object().shape({
     .min(1, 'Minimum 1 deltager')
     .max(30, 'Maksimum 30 deltagere')
     .required('Påkrævet'),
+  comments: Yup.string().max(10, 'Tekst er for lang'),
   studio: Yup.number().required('Påkrævet'),
 });
 
@@ -36,6 +38,7 @@ const BookingForm = ({ studios, selectedStudio }) => {
         phone: '',
         participants: 10,
         studio: selectedStudio || '',
+        comments: '',
       }}
       validationSchema={ValidationSchema}
       onSubmit={values => {
@@ -43,7 +46,7 @@ const BookingForm = ({ studios, selectedStudio }) => {
         console.log(values);
       }}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, handleBlur, handleChange, values }) => (
         <Form>
           <h2>Kontakt oplysninger</h2>
           <div className="row">
@@ -186,6 +189,27 @@ const BookingForm = ({ studios, selectedStudio }) => {
                 ) : null}
               </div>
             </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="comments">Kommentarer til studiet</label>
+            <TextareaAutosize
+              name="comments"
+              id="comments"
+              className="form-control"
+              minRows={2}
+              maxRows={6}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              defaultValue={values.comments}
+              data-testid="textarea-comments
+            "
+            />
+            {errors.comments && touched.comments ? (
+              <div className="invalid-feedback" data-testid="error-comments">
+                {errors.comments}
+              </div>
+            ) : null}
           </div>
 
           <button type="submit" className="btn btn-primary" data-testid="form-submit">
