@@ -45,6 +45,7 @@ const BookingForm = ({ studios, selectedStudio }) => {
     >
       {({ errors, touched }) => (
         <Form>
+          <h2>Kontakt oplysninger</h2>
           <div className="row">
             <div className="col-md-6">
               <div className="form-group" data-testid="wrapper-firstName">
@@ -129,56 +130,62 @@ const BookingForm = ({ studios, selectedStudio }) => {
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="participants">Antal deltagere</label>
-            <Field
-              name="participants"
-              type="number"
-              id="participants"
-              className={
-                errors.participants && touched.participants
-                  ? 'form-control is-invalid'
-                  : 'form-control'
-              }
-              data-testid="input-participants"
-            />
-            {errors.participants && touched.participants ? (
-              <div className="invalid-feedback" data-testid="error-participants">
-                {errors.participants}
-              </div>
-            ) : null}
-          </div>
-
-          <div
-            className={selectedStudio ? 'form-group d-none' : 'form-group'}
-            data-testid="studio-wrapper"
-          >
-            <label htmlFor="studio">Lydstudie</label>
-            <Field
-              as="select"
-              name="studio"
-              id="studio"
-              className={
-                errors.studio && touched.studio ? 'form-control is-invalid' : 'form-control'
-              }
-              placeholder="Vælg studie"
-              data-testid="select-studio"
-            >
-              {studios.map(studio => (
-                <option
-                  key={`studio-${studio.id}`}
-                  value={studio.id}
-                  data-testid="select-option-studio"
+          <h2>Detaljer</h2>
+          <div className="row">
+            <div className="col-sm-6">
+              <div
+                className={selectedStudio ? 'form-group d-none' : 'form-group'}
+                data-testid="studio-wrapper"
+              >
+                <label htmlFor="studio">Lydstudie</label>
+                <Field
+                  as="select"
+                  name="studio"
+                  id="studio"
+                  className={
+                    errors.studio && touched.studio ? 'form-control is-invalid' : 'form-control'
+                  }
+                  placeholder="Vælg studie"
+                  data-testid="select-studio"
                 >
-                  {studio.name}
-                </option>
-              ))}
-            </Field>
-            {errors.studio && touched.studio ? (
-              <div className="invalid-feedback" data-testid="error-studio">
-                {errors.studio}
+                  {studios.map(studio => (
+                    <option
+                      key={`studio-${studio.id}`}
+                      value={studio.id}
+                      data-testid="select-option-studio"
+                    >
+                      {studio.name}
+                    </option>
+                  ))}
+                </Field>
+                {errors.studio && touched.studio ? (
+                  <div className="invalid-feedback" data-testid="error-studio">
+                    {errors.studio}
+                  </div>
+                ) : null}
               </div>
-            ) : null}
+            </div>
+            <div className="col-sm-6">
+              <div className="form-group">
+                <label htmlFor="participants">Antal deltagere</label>
+                <Field
+                  name="participants"
+                  type="number"
+                  id="participants"
+                  className={
+                    errors.participants && touched.participants
+                      ? 'form-control is-invalid'
+                      : 'form-control'
+                  }
+                  data-testid="input-participants"
+                />
+                {errors.participants && touched.participants ? (
+                  <div className="invalid-feedback" data-testid="error-participants">
+                    {errors.participants}
+                  </div>
+                ) : null}
+              </div>
+            </div>
           </div>
 
           <button type="submit" className="btn btn-primary" data-testid="form-submit">
