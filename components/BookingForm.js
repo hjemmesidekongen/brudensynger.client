@@ -26,6 +26,7 @@ const ValidationSchema = Yup.object().shape({
     .required('Påkrævet'),
   comments: Yup.string().max(10, 'Tekst er for lang'),
   studio: Yup.number().required('Påkrævet'),
+  terms: Yup.bool().oneOf([true], 'Vilkår og betingelser skal accepteres'),
 });
 
 const BookingForm = ({ studios, selectedStudio }) => {
@@ -39,6 +40,7 @@ const BookingForm = ({ studios, selectedStudio }) => {
         participants: 10,
         studio: selectedStudio || '',
         comments: '',
+        terms: false,
       }}
       validationSchema={ValidationSchema}
       onSubmit={values => {
@@ -90,7 +92,6 @@ const BookingForm = ({ studios, selectedStudio }) => {
               </div>
             </div>
           </div>
-
           <div className="row">
             <div className="col-sm-6">
               <div className="form-group" data-testid="wrapper-emailAddress">
@@ -132,7 +133,6 @@ const BookingForm = ({ studios, selectedStudio }) => {
               </div>
             </div>
           </div>
-
           <h2>Detaljer</h2>
           <div className="row">
             <div className="col-sm-6">
@@ -190,7 +190,6 @@ const BookingForm = ({ studios, selectedStudio }) => {
               </div>
             </div>
           </div>
-
           <div className="form-group">
             <label htmlFor="comments">Kommentarer til studiet</label>
             <TextareaAutosize
@@ -208,6 +207,26 @@ const BookingForm = ({ studios, selectedStudio }) => {
             {errors.comments && touched.comments ? (
               <div className="invalid-feedback" data-testid="error-comments">
                 {errors.comments}
+              </div>
+            ) : null}
+          </div>
+
+          <div className="form-check">
+            <Field
+              name="terms"
+              type="checkbox"
+              id="terms"
+              className={
+                errors.terms && touched.terms ? 'form-check-input is-invalid' : 'form-check-input'
+              }
+              data-testid="checkbox-terms"
+            />
+            <label htmlFor="terms" className="form-check-label">
+              Acceptér vilkår for bestilling
+            </label>
+            {errors.terms && touched.terms ? (
+              <div className="invalid-feedback" data-testid="error-terms">
+                {errors.terms}
               </div>
             ) : null}
           </div>

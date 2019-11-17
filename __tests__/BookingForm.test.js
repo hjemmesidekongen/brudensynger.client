@@ -362,6 +362,8 @@ describe('time interval selection input', () => {
 });
 
 // Comments textarea.
+
+// TODO make sure that comments are handled correctly since it is a custom textarea.
 describe('comments textarea', () => {
   it('exists', () => {
     const { queryByTestId } = render(<BookingForm studios={[]} />);
@@ -373,11 +375,21 @@ describe('comments textarea', () => {
 
 // Terms and conditions checkbox.
 describe('terms and conditions input', () => {
-  it('exists', () => {});
-  it('has to be accepted before being able to submit', () => {});
-  it('links to a valid page', () => {
-    // Find link in checkbox label.
-    // Make sure it doesnt return 404.
+  it('exists', () => {
+    const { queryByTestId } = render(<BookingForm studios={[]} />);
+    const checkbox = queryByTestId('checkbox-terms');
+
+    expect(checkbox).toBeInTheDocument();
+  });
+  it('has to be accepted before being able to submit', async () => {
+    const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
+    const checkbox = getByTestId('checkbox-terms');
+
+    fireEvent.blur(checkbox);
+
+    const validationErrors = await findByTestId('error-terms');
+
+    expect(validationErrors.innerHTML).toBe('Vilkår og betingelser skal accepteres');
   });
 });
 
