@@ -381,6 +381,7 @@ describe('terms and conditions input', () => {
 
     expect(checkbox).toBeInTheDocument();
   });
+  
   it('has to be accepted before being able to submit', async () => {
     const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const checkbox = getByTestId('checkbox-terms');
@@ -389,7 +390,7 @@ describe('terms and conditions input', () => {
 
     const validationErrors = await findByTestId('error-terms');
 
-    expect(validationErrors.innerHTML).toBe('Vilkår og betingelser skal accepteres');
+    expect(validationErrors.innerHTML).toBe('Vilkår og betingelser skal accepteres1');
   });
 });
 
