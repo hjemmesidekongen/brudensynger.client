@@ -390,7 +390,7 @@ describe('terms and conditions input', () => {
 
     const validationErrors = await findByTestId('error-terms');
 
-    expect(validationErrors.innerHTML).toBe('Vilkår og betingelser skal accepteres1');
+    expect(validationErrors.innerHTML).toBe('Vilkår og betingelser skal accepteres');
   });
 });
 

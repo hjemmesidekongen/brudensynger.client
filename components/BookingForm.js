@@ -201,8 +201,7 @@ const BookingForm = ({ studios, selectedStudio }) => {
               onChange={handleChange}
               onBlur={handleBlur}
               defaultValue={values.comments}
-              data-testid="textarea-comments
-            "
+              data-testid="textarea-comments"
             />
             {errors.comments && touched.comments ? (
               <div className="invalid-feedback" data-testid="error-comments">
