@@ -14,7 +14,8 @@ describe('props', () => {
   });
 
   it('validates selectedStudio props', () => {
-    const component = () => render(<BookingForm selectedStudio="not a number" studios={[]} />);
+    const component = () =>
+      render(<BookingForm selectedStudio="not a number" studios={[]} />);
 
     expect(component).toThrowError();
   });
@@ -250,7 +251,10 @@ describe('chosen studio select', () => {
   });
 
   it('renders all studios props as options', () => {
-    const studios = [{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }];
+    const studios = [
+      { id: 1, name: 'Studio 1' },
+      { id: 2, name: 'Studio 2' },
+    ];
     const { getAllByTestId } = render(<BookingForm studios={studios} />);
     const options = getAllByTestId('select-option-studio');
 
@@ -258,24 +262,39 @@ describe('chosen studio select', () => {
   });
 
   it('marks the predefined studio as selected', () => {
-    const studios = [{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }];
-    const { getByDisplayValue } = render(<BookingForm studios={studios} selectedStudio={2} />);
+    const studios = [
+      { id: 1, name: 'Studio 1' },
+      { id: 2, name: 'Studio 2' },
+    ];
+    const { getByDisplayValue } = render(
+      <BookingForm studios={studios} selectedStudio={2} />
+    );
     const selectElement = getByDisplayValue('Studio 2');
 
     expect(selectElement).toBeTruthy();
   });
 
   it('is hidden when studio is preselected', () => {
-    const studios = [{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }];
-    const { getByTestId } = render(<BookingForm studios={studios} selectedStudio={2} />);
+    const studios = [
+      { id: 1, name: 'Studio 1' },
+      { id: 2, name: 'Studio 2' },
+    ];
+    const { getByTestId } = render(
+      <BookingForm studios={studios} selectedStudio={2} />
+    );
     const component = getByTestId('studio-wrapper');
 
     expect(component).toHaveClass('d-none');
   });
 
   it('is visible when studio is not preselected', () => {
-    const studios = [{ id: 1, name: 'Studio 1' }, { id: 2, name: 'Studio 2' }];
-    const { getByTestId } = render(<BookingForm studios={studios} selectedStudio={undefined} />);
+    const studios = [
+      { id: 1, name: 'Studio 1' },
+      { id: 2, name: 'Studio 2' },
+    ];
+    const { getByTestId } = render(
+      <BookingForm studios={studios} selectedStudio={undefined} />
+    );
     const component = getByTestId('studio-wrapper');
 
     expect(component).not.toHaveClass('hidden');
@@ -381,7 +400,7 @@ describe('terms and conditions input', () => {
 
     expect(checkbox).toBeInTheDocument();
   });
-  
+
   it('has to be accepted before being able to submit', async () => {
     const { getByTestId, findByTestId } = render(<BookingForm studios={[]} />);
     const checkbox = getByTestId('checkbox-terms');
@@ -390,7 +409,9 @@ describe('terms and conditions input', () => {
 
     const validationErrors = await findByTestId('error-terms');
 
-    expect(validationErrors.innerHTML).toBe('Vilkår og betingelser skal accepteres');
+    expect(validationErrors.innerHTML).toBe(
+      'Vilkår og betingelser skal accepteres'
+    );
   });
 });
 

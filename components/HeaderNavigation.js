@@ -67,7 +67,7 @@ HeaderNavigation.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       path: PropTypes.string.isRequired,
-    }),
+    })
   ),
 };
 

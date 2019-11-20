@@ -8,7 +8,9 @@ const ActiveLink = ({ children, activeClassName, ...props }) => {
   const child = Children.only(children);
 
   const className =
-    pathname === props.href ? `${child.props.className} ${activeClassName}` : child.props.className;
+    pathname === props.href
+      ? `${child.props.className} ${activeClassName}`
+      : child.props.className;
 
   return <Link {...props}>{React.cloneElement(child, { className })}</Link>;
 };

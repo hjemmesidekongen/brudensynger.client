@@ -8,13 +8,12 @@ const Priser = () => (
     <Head>
       <title>Priser</title>
     </Head>
-    1.500 DKK,- 
+    1.500 DKK,-
     <br />
     - 15 deltagere
     <br />
     - 3 valgfri sange
-    <br />
-    - 1 stk. CD
+    <br />- 1 stk. CD
   </Layout>
 );
 
