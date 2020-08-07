@@ -1,11 +1,24 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "presets": [
+    "next/babel"
+  ],
   "env": {
     "production": {
-      "plugins": [["react-remove-properties", { "properties": ["data-testid"] }]]
+      "plugins": [
+        [
+          "react-remove-properties",
+          {
+            "properties": [
+              "data-testid"
+            ]
+          }
+        ]
+      ]
     },
     "test": {
-      "plugins": ["@babel/plugin-transform-runtime"]
+      "plugins": [
+        "@babel/plugin-transform-runtime"
+      ]
     }
   }
 }

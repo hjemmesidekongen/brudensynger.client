@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import ActiveLink from "./ActiveLink";
+import ActiveLink from './ActiveLink';
 
 const FooterNavigation = ({ links }) => {
   if (links && links.length) {
@@ -9,7 +9,7 @@ const FooterNavigation = ({ links }) => {
     return (
       <nav data-testid="navigation">
         <ul className="list-inline">
-          {links.map(link => (
+          {links.map((link) => (
             <li key={link.path} className="list-inline-item">
               <ActiveLink href={link.path} activeClassName="active">
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -26,16 +26,16 @@ const FooterNavigation = ({ links }) => {
 };
 
 FooterNavigation.defaultProps = {
-  links: []
+  links: [],
 };
 
 FooterNavigation.propTypes = {
   links: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      path: PropTypes.string.isRequired
+      path: PropTypes.string.isRequired,
     })
-  )
+  ),
 };
 
 export default FooterNavigation;

@@ -13,9 +13,7 @@ const ValidationSchema = Yup.object().shape({
     .min(2, 'Tekst er for kort')
     .max(50, 'Tekst er for lang')
     .required('Påkrævet'),
-  email: Yup.string()
-    .email('Ugyldig e-mail adresse')
-    .required('Påkrævet'),
+  email: Yup.string().email('Ugyldig e-mail adresse').required('Påkrævet'),
   phone: Yup.string()
     .min(8, 'Telefon nr. er for kort')
     .max(8, 'Telefon nr. er for lang')
@@ -42,7 +40,7 @@ const BookingForm = ({ studios, selectedStudio }) => (
       terms: false,
     }}
     validationSchema={ValidationSchema}
-    onSubmit={values => {
+    onSubmit={(values) => {
       // same shape as initial values
       console.log(values);
     }}
@@ -164,7 +162,7 @@ const BookingForm = ({ studios, selectedStudio }) => (
                 placeholder="Vælg studie"
                 data-testid="select-studio"
               >
-                {studios.map(studio => (
+                {studios.map((studio) => (
                   <option
                     key={`studio-${studio.id}`}
                     value={studio.id}

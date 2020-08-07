@@ -25,7 +25,7 @@ const HeaderNavigation = ({ links }) => {
             data-testid="navigation"
           >
             <ul className="navbar-nav mr-auto">
-              {links.map(link => (
+              {links.map((link) => (
                 <li className="nav-item" key={link.path}>
                   <ActiveLink href={link.path} activeClassName="active">
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
