@@ -12,7 +12,7 @@ module.exports = {
       host: '64.225.99.176',
       ref: 'origin/develop',
       repo: 'git@github.com:hjemmesidekongen/brudensynger.client.git',
-      path: '/var/www/brudensynger.dk/',
+      path: '/var/www/staging.brudensynger.dk/',
       'pre-deploy-local': '',
       'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js',
       'pre-setup': '',
