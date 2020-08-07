@@ -4,6 +4,12 @@ module.exports = {
       name: 'brudensynger',
       script: 'npm',
       args: 'start',
+      env: {
+        NODE_ENV: 'staging',
+      },
+      env_production: {
+        NODE_ENV: 'production',
+      },
     },
   ],
   deploy: {
@@ -14,7 +20,8 @@ module.exports = {
       repo: 'git@github.com:hjemmesidekongen/brudensynger.client.git',
       path: '/var/www/staging.brudensynger.dk/',
       'pre-deploy-local': '',
-      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js',
+      'post-deploy':
+        'npm install && pm2 startOrRestart ecosystem.config.js --env staging',
       'pre-setup': '',
       env: {
         NODE_ENV: 'development',
@@ -28,7 +35,8 @@ module.exports = {
       repo: 'git@github.com:hjemmesidekongen/brudensynger.client.git',
       path: '/var/www/brudensynger.dk/',
       'pre-deploy-local': '',
-      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js',
+      'post-deploy':
+        'npm install && pm2 startOrRestart ecosystem.config.js --env production',
       'pre-setup': '',
       env: {
         NODE_ENV: 'production',
