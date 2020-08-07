@@ -1,7 +1,7 @@
-import React from 'react';
-import Head from 'next/head';
+import React from "react";
+import Head from "next/head";
 
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
 
 const Index = () => (
   <Layout>
@@ -10,6 +10,7 @@ const Index = () => (
         Polterabend i Aarhus, København – Lydindspilning og lydstudie - Bru
       </title>
     </Head>
+
     <h1>Polterabend i bl.a. Aarhus, København, Odense og Aalborg</h1>
     <h2>
       Hej, og velkommen til en god omgang polterabend cd-indspilning hos

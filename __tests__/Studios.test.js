@@ -2,29 +2,20 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import HeaderNavigation from '../components/HeaderNavigation';
-
-jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: '',
-      asPath: '',
-    };
-  },
-}));
+import Studios from '../components/Studios';
 
 it('renders without error', () => {
-  const component = () => render(<HeaderNavigation links={[]} />);
+  const component = () => render(<Studios />);
 
   expect(component).not.toThrowError();
 });
 
-it('doesnt render navigation if no links are provided', () => {
-  const { queryByTestId } = render(<HeaderNavigation links={[]} />);
+it('renders all studios that', () => {
+  const studios = [{ name: 'Name 1' }, { name: 'Name 2' }, { name: 'Name 3' }];
 
-  expect(queryByTestId('navigation')).not.toBeInTheDocument();
+  const component = () => render(<Studios studios={studios} />);
+
+  expect(component).not.toThrowError();
 });
 
 it('renders all links that are passed via props', () => {
