@@ -7,10 +7,9 @@ module.exports = {
       watch: true,
       instances: 'max',
       exec_mode: 'cluster',
-      error_file: '../logs',
+      error_file: '../logs/XXX.err.log',
       env: {
         NODE_ENV: 'staging',
-        PORT: 4021,
       },
     },
     {
@@ -23,7 +22,6 @@ module.exports = {
       error_file: '../logs/XXX.err.log',
       env: {
         NODE_ENV: 'production',
-        PORT: 4020,
       },
     },
   ],
@@ -38,6 +36,10 @@ module.exports = {
       'post-deploy':
         'npm install && pm2 startOrRestart ecosystem.config.js --only brudensynger.frontend.staging',
       'pre-setup': '',
+      env: {
+        NODE_ENV: 'staging',
+        PORT: 4021,
+      },
     },
     production: {
       user: 'mn',
@@ -49,6 +51,10 @@ module.exports = {
       'post-deploy':
         'npm install && pm2 startOrRestart ecosystem.config.js --only brudensynger.frontend.production',
       'pre-setup': '',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 4020,
+      },
     },
   },
 };
