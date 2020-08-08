@@ -1,18 +1,29 @@
 module.exports = {
   apps: [
     {
-      name: 'brudensynger.dk - frontend',
+      name: 'brudensynger.frontend.staging',
       script: 'npm',
       args: 'start',
       watch: true,
       instances: 'max',
       exec_mode: 'cluster',
       error_file: '../logs',
-      env_staging: {
+      env: {
         NODE_ENV: 'staging',
+        PORT: 4021,
       },
-      env_production: {
+    },
+    {
+      name: 'brudensynger.frontend.production',
+      script: 'npm',
+      args: 'start',
+      watch: true,
+      instances: 'max',
+      exec_mode: 'cluster',
+      error_file: '../logs',
+      env: {
         NODE_ENV: 'production',
+        PORT: 4020,
       },
     },
   ],
@@ -25,12 +36,8 @@ module.exports = {
       path: '/var/www/staging.brudensynger.dk/',
       'pre-deploy-local': '',
       'post-deploy':
-        'npm install && pm2 startOrRestart ecosystem.config.js --env staging',
+        'npm install && pm2 startOrRestart ecosystem.config.js --only brudensynger.frontend.staging',
       'pre-setup': '',
-      env: {
-        NODE_ENV: 'staging',
-        PORT: 4021,
-      },
     },
     production: {
       user: 'mn',
@@ -40,12 +47,8 @@ module.exports = {
       path: '/var/www/brudensynger.dk/',
       'pre-deploy-local': '',
       'post-deploy':
-        'npm install && pm2 startOrRestart ecosystem.config.js --env production',
+        'npm install && pm2 startOrRestart ecosystem.config.js --only brudensynger.frontend.production',
       'pre-setup': '',
-      env: {
-        NODE_ENV: 'production',
-        PORT: 4020,
-      },
     },
   },
 };
