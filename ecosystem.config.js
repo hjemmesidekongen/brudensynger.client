@@ -6,9 +6,6 @@ module.exports = {
       args: 'start',
       error_file: '../logs/XXXerr.log',
       out_file: '../logs/XXXout.log',
-      env: {
-        NODE_ENV: 'staging',
-      },
     },
     {
       name: 'brudensynger.frontend.production',
@@ -18,9 +15,6 @@ module.exports = {
       exec_mode: 'cluster',
       error_file: '../logs/XXXerr.log',
       out_file: '../logs/XXXout.log',
-      env: {
-        NODE_ENV: 'production',
-      },
     },
   ],
   deploy: {
@@ -35,6 +29,7 @@ module.exports = {
         'npm install && pm2 startOrRestart ecosystem.config.js --only brudensynger.frontend.staging',
       'pre-setup': '',
       env: {
+        NODE_ENV: 'staging',
         PORT: 4021,
       },
     },
@@ -49,6 +44,7 @@ module.exports = {
         'npm install && pm2 startOrRestart ecosystem.config.js --only brudensynger.frontend.production',
       'pre-setup': '',
       env: {
+        NODE_ENV: 'production',
         PORT: 4020,
       },
     },
