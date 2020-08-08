@@ -1,12 +1,14 @@
 module.exports = {
   apps: [
     {
-      name: 'brudensynger',
+      name: 'brudensynger.dk - frontend',
       script: 'npm',
       args: 'start',
+      watch: true,
       instances: 'max',
       exec_mode: 'cluster',
-      env: {
+      error_file: '../logs',
+      env_staging: {
         NODE_ENV: 'staging',
       },
       env_production: {
@@ -26,7 +28,7 @@ module.exports = {
         'npm install && pm2 startOrRestart ecosystem.config.js --env staging',
       'pre-setup': '',
       env: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'staging',
         PORT: 4021,
       },
     },
