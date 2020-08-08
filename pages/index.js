@@ -1,9 +1,14 @@
-import React from 'react';
-import Head from 'next/head';
+import React from "react";
+import Head from "next/head";
 
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
 
-const Index = () => (
+const Production = () => (
+  <div>
+    <h3>Siden er under udvikling</h3>
+  </div>
+);
+const Staging = () => (
   <Layout>
     <Head>
       <title>
@@ -39,5 +44,13 @@ const Index = () => (
     </p>
   </Layout>
 );
+
+const Index = () => {
+  if (process.env.NODE_ENV === "production") {
+    return <Production />;
+  }
+
+  return <Staging />;
+};
 
 export default Index;
