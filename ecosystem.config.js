@@ -4,8 +4,6 @@ module.exports = {
       name: 'brudensynger.frontend.staging',
       script: 'npm',
       args: 'start',
-      instances: 'max',
-      exec_mode: 'cluster',
       error_file: '../logs/XXXerr.log',
       out_file: '../logs/XXXout.log',
       env: {
