@@ -20,7 +20,7 @@ module.exports = {
       watch: true,
       instances: 'max',
       exec_mode: 'cluster',
-      error_file: '../logs',
+      error_file: '../logs/XXX.err.log',
       env: {
         NODE_ENV: 'production',
         PORT: 4020,
