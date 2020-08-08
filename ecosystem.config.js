@@ -33,7 +33,6 @@ module.exports = {
         'npm install && pm2 startOrRestart ecosystem.config.js --only brudensynger.frontend.staging',
       'pre-setup': '',
       env: {
-        NODE_ENV: 'staging',
         PORT: 4021,
       },
     },
@@ -48,7 +47,6 @@ module.exports = {
         'npm install && pm2 startOrRestart ecosystem.config.js --only brudensynger.frontend.production',
       'pre-setup': '',
       env: {
-        NODE_ENV: 'production',
         PORT: 4020,
       },
     },
