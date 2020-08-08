@@ -4,7 +4,6 @@ module.exports = {
       name: 'brudensynger.frontend.staging',
       script: 'npm',
       args: 'start',
-      watch: true,
       instances: 'max',
       exec_mode: 'cluster',
       env: {
@@ -15,7 +14,6 @@ module.exports = {
       name: 'brudensynger.frontend.production',
       script: 'npm',
       args: 'start',
-      watch: true,
       instances: 'max',
       exec_mode: 'cluster',
       env: {
